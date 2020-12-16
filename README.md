@@ -13,6 +13,7 @@
 * mini-Xception 모델을 학습시킬 때 사용하였다.
 * Emotion map = {0:Angry, 1:Disgust, 2:Fear, 3:Happy, 4:Sad, 5:Surprise, 6:Neutral}
 <br/>
+
 2. [Flickr-Faces-HQ(FFHQ)](https://github.com/NVlabs/ffhq-dataset.git)
 <img src="./Demo-Image/stylegan2/dataset/ffhq-원본.jpg" width="70%"></img>
 [그림 1. FFHQ를 base network로 설정했을 때의 fake init snapshot.]
@@ -20,6 +21,7 @@
 *  NVlab에서는 StyleGAN2 custom model 학습을 쉽게 할 수 있도록 FFHQ와 같은 데이터 셋과 pretrained 모델을 제공한다.
 *  StyleGAN2에서 style을 학습시키기 이전, fake init 스냅샷으로 [그림 1]과 같은 사진이 생성된다.
 <br/>
+
 3. [Emoji](https://drive.google.com/drive/folders/11xg3i-LVIWEIQ5mS1c97Lm3_iW5qoU10?usp=sharing)
 <img src="./Demo-Image/stylegan2/dataset/emoji-원본.jpg" width="70%"></img>
 [그림 2] Emoji-fy StyleGAN2 model
