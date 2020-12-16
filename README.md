@@ -9,29 +9,29 @@ Google Drive : https://drive.google.com/drive/folders/1coYOcNSM0Zt3LNgoP1daZi7UA
 
 ## DataSet
 *  FFHQ(pretained network) : base network로 사용.\
-<img src="./Demo-Image/stylegan2/ffhq-원본.jpg" width="40%"></img>
+<img src="./Demo-Image/stylegan2/ffhq-원본.jpg" width="90%"></img>
 
 
 *  Face of baby characters in Disney/Pixar\
-<img src="./Demo-Image/stylegan2/baby-원본.jpg" width="40%"></img>
+<img src="./Demo-Image/stylegan2/baby-원본.jpg" width="90%"></img>
 
 
 *  Face of characters in Disney/Pixar\
-<img src="./Demo-Image/stylegan2/cartoon-원본.jpg" width="40%"></img>
+<img src="./Demo-Image/stylegan2/cartoon-원본.jpg" width="90%"></img>
 
 
 * Emoji\
-<img src="./Demo-Image/stylegan2/emoji-원본.jpg" width="40%"></img>
+<img src="./Demo-Image/stylegan2/emoji-원본.jpg" width="90%"></img>
 
 
 ## Training Results
 *  Baby-fy Results\
-<img src="./Demo-Image/stylegan2/baby-fy.jpg" width="40%"></img>
+<img src="./Demo-Image/stylegan2/baby-fy.jpg" width="90%"></img>
 
 
 *  Tooni-fy Results\
-<img src="./Demo-Image/stylegan2/cartooni-fy.jpg" width="40%"></img>
+<img src="./Demo-Image/stylegan2/cartooni-fy.jpg" width="90%"></img>
 
 
 *  Emoji-fy Results\
-<img src="./Demo-Image/stylegan2/emoji-fy.jpg" width="40%"></img>
+<img src="./Demo-Image/stylegan2/emoji-fy.jpg" width="90%"></img>
