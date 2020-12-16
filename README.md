@@ -20,10 +20,6 @@ Google Drive : https://drive.google.com/drive/folders/1coYOcNSM0Zt3LNgoP1daZi7UA
 
 
 ## DataSet
-*  FFHQ(pretained network) : base network로 사용.\
-<img src="./Demo-Image/stylegan2/ffhq-원본.jpg" width="90%"></img>
-
-
 *  Face of baby characters in Disney/Pixar\
 <img src="./Demo-Image/stylegan2/baby-원본.jpg" width="90%"></img>
 
@@ -37,6 +33,10 @@ Google Drive : https://drive.google.com/drive/folders/1coYOcNSM0Zt3LNgoP1daZi7UA
 
 
 ## Training Results
+*  FFHQ(pretained network) : base network로 사용. 아래 결과물과 비교.\
+<img src="./Demo-Image/stylegan2/ffhq-원본.jpg" width="90%"></img>
+
+
 *  Baby-fy Results\
 <img src="./Demo-Image/stylegan2/baby-fy.jpg" width="90%"></img>
 
