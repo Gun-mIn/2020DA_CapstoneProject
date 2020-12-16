@@ -13,12 +13,20 @@
 * mini-Xception 모델을 학습시킬 때 사용하였다.
 * Emotion map = {0:Angry, 1:Disgust, 2:Fear, 3:Happy, 4:Sad, 5:Surprise, 6:Neutral}
 
+
 2. [Flickr-Faces-HQ(FFHQ)](https://github.com/NVlabs/ffhq-dataset.git)\
 <img src="./Demo-Image/stylegan2/dataset/ffhq-원본.jpg" width="70%"></img>\
 [그림 1. FFHQ를 base network로 설정했을 때의 fake init snapshot.]
 *  NVlab의 StyleGAN2에서 제공하는 고화질의 사람 얼굴 데이터 셋으로, 직접 훈련을 시키진 않았지만 style을 씌우는 base network로 FFHQ 모델을 사용했다.
 * NVlab에서는 StyleGAN2 custom model 학습을 쉽게 할 수 있도록 FFHQ와 같은 데이터 셋과 pretrained 모델을 제공한다.
 * StyleGAN2에서 style을 학습시키기 이전, fake init 스냅샷으로 [그림 1]과 같은 사진이 생성된다.
+
+
+3. [Emoji](https://drive.google.com/drive/folders/11xg3i-LVIWEIQ5mS1c97Lm3_iW5qoU10?usp=sharing)\
+<img src="./Demo-Image/stylegan2/dataset/emoji-원본.jpg" width="70%"></img>
+\[그림 2] Emoji-fy StyleGAN2 model
+* 직접 Google의 이미지 검색에서 크롤링하고, resize와 RGB로의 변환 과정을 통해 생성한 emoji 데이터 셋이다.
+* Emoji-fy 모델을 학습할 때, 사용했다. [그림 2]와 같이 사람 얼굴 모델(FFHQ)의 특성이 많이 남아 있는 network를 저장하기 위해, 기존의 snapshot 주기를 default 값인 4에서 1로 줄여 주었다. 짧은 주기로 network를 저장하고, fake snapshot을 통해 원하는 모델을 선정했다.
 
 
 *  Real-time Emotion Recognition\
@@ -41,10 +49,6 @@
 
 *  Face of characters in Disney/Pixar\
 <img src="./Demo-Image/stylegan2/cartoon-원본.jpg" width="90%"></img>
-
-
-* Emoji\
-<img src="./Demo-Image/stylegan2/emoji-원본.jpg" width="90%"></img>
 
 
 ## Training Results
