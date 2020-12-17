@@ -74,7 +74,7 @@
 [그림 6] personal emoji 생성 과정. 왼쪽부터 StyleGAN2를 통해 생성한 personal emoji 원본, mask를 씌운 이미지, mask 부분을 투명하게 제거한 이미지, face crop을 한 최종 이미지.
 
 - Personal emoji는 사람의 얼굴을 토대로 emoji의 스타일을 덧씌워 새로운 emoji를 생성한 것을 의미한다. [그림 6]을 보면 가장 왼쪽의 이미지가 사람의 얼굴 사진을 base로 생성한 personal emoji이다. Emoji-fy 모델을 이용하여 생성한 사진에서 배경을 제거해주기 위해 cv2의 Contour 함수를 사용했다.
-- Contour 영역을 검출하고, 배경으로 추정되는 부분에 mask를 씌운다. 이 mask 부분의 색상을 지워주고, RGBA로 변환하여 png 파일로 저장한다. 이 png 파일을 얼굴 영역 중심으로 crop 해주면 최종 이미지인 가장 오른쪽의 이미지가 생성된다.
+- Contour 영역을 검출하고, 배경으로 추정되는 부분에 mask를 씌운다. 이 mask 부분의 색상을 지워주고, RGBA로 변환하여 png 파일로 저장한다. 이 png 파일을 얼굴 영역 중심으로 crop 해주면 최종 이미지인 가장 오른쪽의 이미지가 생성된다. 자세한 코드는 **Personal-Emoji** 폴더에서 확인할 수 있다.
 
 ### 2. Real-time Emotion Recognition and Rendering Personal Emoji
 <img src="./Demo-Image/real-time-emotion-recognition/real-time-예시.gif" width="40%"></img>
@@ -118,6 +118,7 @@
 *  mini : mini-Xception, Big : Big-Xception, origin : Xception
 *  Big-Xception과 origin-Xception의 경우, 모델의 용량 대비 정확도가 mini-Xception보다 떨어져 추가적으로 scaling하지 않았다.
 *  Real-time에서 돌아가는 것을 초기 목표로 했기에 validation set에 대한 정확도가 original model보다 **4%** 오른 **model 9**를 최종 모델로 선정했다.
+*  Training과 Real-time Emotion Recognition 관련 코드는 **Emotion-Recognition** 폴더에서 확인할 수 있다.
 
 ### 2. StyleGAN2 Modeling
 *2.1 Results Snapshots*
@@ -135,7 +136,7 @@
 [그림 11] Tooni-fy 모델의 network snapshot
 
 - Emoji, Baby characters, Characters 데이터 셋을 FFHQ을 base로 학습시킨 StyleGAN2 모델의 network snapshot이다. Network를 저장하는 간격을 default 값인 4에서 1로 줄여 스타일이 조금씩 입혀지는 과정들을 보고, 가장 결과물이 나은 모델을 선정했다.
-- 결과물에서 사용한 Toonify 모델은 [그림 11]이다. FFHQ 데이터 셋[그림 1]과 비교하면 원본에서 얼마나 변했는지를 확인할 수 있다.
+- 결과물에서 사용한 Toonify 모델은 [그림 11]이다. FFHQ 데이터 셋[그림 1]과 비교하면 원본에서 얼마나 변했는지를 확인할 수 있다. Training 코드는 **StyleGAN2_Cartoon_Model.ipynb**에서 확인할 수 있다.
 
 *2.2 Compare FFHQ(origin) with Emoji-fy, Baby-fy, Tooni-fy.*
 
