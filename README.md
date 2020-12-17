@@ -88,7 +88,8 @@
 <img src="./Demo-Image/program-process/final-design.png" width="90%"></img>
 
 [그림 8] 최종 프로그램 설계도
-- 
+- Real-time을 포기하고, 영상의 프레임 단위로 Tooni-fy를 진행하는 것을 선택했다. [그림 8]과 같이 원본 영상이 들어오면, 10 프레임 단위로 프레임을 받아 와 Toonified 영상을 만든다. 그렇게 만들어진 Toonified 영상에 Emotion Recognition을 진행해 최종 결과물을 만든다.
+- 초기 설계에서 Personal emoji의 결과물이 예상보다 예쁘게 나오지 않아 Disney/Pixar/Dream Works의 애니메이션 캐릭터 얼굴을 학습 시킨 Toonify 모델을 사용했다.
 
 ## Training Results
 *  Baby-fy Results\
