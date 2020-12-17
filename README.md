@@ -154,3 +154,23 @@
 [그림 13] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
 
 - Projection은 StyleGAN2의 FFHQ 얼굴 탐지와 정렬 모듈을 사용한다. Projection 코드는 [pinkney의 Toonify Yourself](https://colab.research.google.com/drive/1s2XPNMwf6HDhrJ1FMwlW1jl-eQ2-_tlk?usp=sharing)를 참고했다.
+
+### 3. Frame-by-frame Toonify & Emotion Recognition
+ *3.1 Toonify video*
+
+
+ *3.2 Emotion Recognition of Toonified Video*
+
+
+# References
+### 1. StyleGAN2
+[1.1 NVlab의 original StyleGAN2 Repo.](https://github.com/NVlabs/stylegan2.git)
+
+[1.2 Pinkney의 StyleGAN2 fork.](https://github.com/justinpinkney/stylegan2.git)
+
+[1.3 dvschultz의 StyleGAN2 fork.](https://github.com/dvschultz/stylegan2)
+
+### 2. mini-Xception
+[2.1 Oarriaga의 mini-Xception Repo.](https://github.com/oarriaga/face_classification.git)
+
+[2.2 omar178의 mini-Xception 응용 Repo.](https://github.com/omar178/Emotion-recognition.git)
