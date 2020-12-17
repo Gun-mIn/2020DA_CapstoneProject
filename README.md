@@ -91,14 +91,35 @@
 - Real-time을 포기하고, 영상의 프레임 단위로 Tooni-fy를 진행하는 것을 선택했다. [그림 8]과 같이 원본 영상이 들어오면, 10 프레임 단위로 프레임을 받아 와 Toonified 영상을 만든다. 그렇게 만들어진 Toonified 영상에 Emotion Recognition을 진행해 최종 결과물을 만든다.
 - 초기 설계에서 Personal emoji의 결과물이 예상보다 예쁘게 나오지 않아 Disney/Pixar/Dream Works의 애니메이션 캐릭터 얼굴을 학습 시킨 Toonify 모델을 사용했다.
 
-## Training Results
-*  Baby-fy Results\
-<img src="./Demo-Image/stylegan2/baby-fy.jpg" width="90%"></img>
+# Results
+### 1. Real-time Emotion Recognition
+| Model | Batch Size | Resolution | Augmentation | # of Conv Blocks | Architecture | Val Acc | Val Loss |
+|--|--|--|--|--|--|--|--|
+| origin | 32 | 48x48 | X | 4 | mini | 0.6478 | 0.9646 |
+| 1 | 32 | 48x48 | O(1,000) | 4 | mini  | 0.6418 | 1.0114 |
+| 2 | 32 | 48x48 | O(5,000) | 4 | mini  | 0.6363 | 0.9962 |
+| 3 | 48 | 48x48 | O(5,000) | 4 | mini  | 0.6381 | 0.9445 |
+| 4 | 32 | 48x48 | O(10,000) | 4 | mini  | 0.6441 | 0.9836 |
+| 5 | 32 | 48x48 | O(10,000) | 4 | mini  | 0.6450 | 0.9814 |
+| 6 | 48 | 128x128 | O(10,000) | 5 | mini  | 0.6743 | 0.9449 |
+| 7 | 32 | 128x128 | O(10,000) | 5 | mini  | 0.6734 | 0.9678 |
+| 8 | 48 | 96x96 | O(10,000) | 6 | mini  | 0.6778 | 0.9307 |
+| **9** | 32 | 96x96 | O(10,000) | 6 | mini  | **0.6817** | **0.9269** |
+| 10 | 32 | 72x72 | O(10,000) | 6 | mini | 0.6539 | 0.9622 |
+| 11 | 32 | 48x48 | O(10,000) | 4 | Big | 0.6482 | 0.9949 |
+| 12 | 32 | 94x94 | O(10,000) | 4 | Big | 0.6454 | 1.0088 |
+| 13 | 32 | 128x128 | O(10,000) | 4 | Big | 0.6300 | 1.0584 |
+| 14 | 32 | 96x96 | O(10,000) | 4 | origin | 0.6704 | 0.9361 |
+| 15 | 32 | 96x96 | O(10,000) | 4 | origin | 0.6705 | 0.9304 |
+| 16 | 32 | 96x96 | O(10,000) | 4 | origin | 0.6626 | 0.9816 |
+
+[도표 1] Emotion Recognition Model Scaling 과정
+
+*  mini : mini-Xception, Big : Big-Xception, origin : Xception
+*  Big-Xception과 origin-Xception의 경우, 모델의 용량 대비 정확도가 mini-Xception보다 떨어져 추가적으로 scaling하지 않았다.
+*  Real-time에서 돌아가는 것을 초기 목표로 했기에 validation set에 대한 정확도가 original model보다 **4%** 오른 **model 9**를 최종 모델로 선정했다.
 
 
-*  Tooni-fy Results\
-<img src="./Demo-Image/stylegan2/cartooni-fy.jpg" width="90%"></img>
-
-
-*  Emoji-fy Results\
-<img src="./Demo-Image/stylegan2/emoji-fy.jpg" width="90%"></img>
+<img src="./Demo-Image/stylegan2/model-snapshot/baby-fy.jpg" width="90%"></img>
+<img src="./Demo-Image/stylegan2/model-snapshot/cartooni-fy.jpg" width="90%"></img>
+<img src="./Demo-Image/stylegan2/model-snapshot/emoji-fy.jpg" width="90%"></img>
