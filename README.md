@@ -92,7 +92,7 @@
 - 초기 설계에서 Personal emoji의 결과물이 예상보다 예쁘게 나오지 않아 Disney/Pixar/Dream Works의 애니메이션 캐릭터 얼굴을 학습 시킨 Toonify 모델을 사용했다.
 
 # Results
-### 1. Real-time Emotion Recognition
+### 1. Real-time Emotion Recognition Model Training
 | Model | Batch Size | Resolution | Augmentation | # of Conv Blocks | Architecture | Val Acc | Val Loss |
 |--|--|--|--|--|--|--|--|
 | origin | 32 | 48x48 | X | 4 | mini | 0.6478 | 0.9646 |
@@ -157,11 +157,38 @@
 - Projection은 StyleGAN2의 FFHQ 얼굴 탐지와 정렬 모듈을 사용한다. Projection 코드는 [pinkney의 Toonify Yourself](https://colab.research.google.com/drive/1s2XPNMwf6HDhrJ1FMwlW1jl-eQ2-_tlk?usp=sharing)를 참고했다.
 
 ### 3. Frame-by-frame Toonify & Emotion Recognition
- *3.1 Toonify video*
+<img src="./Demo-Image/toonify-emotion/sample1-toon.gif" width="40%"></img>
 
+[그림 14] Sample 1의 Tooni-fied Video
 
- *3.2 Emotion Recognition of Toonified Video*
+<img src="./Demo-Image/toonify-emotion/sample1-slow.gif" width="40%"></img>
 
+[그림 15] Sample 1의 최종 결과물
+
+<img src="./Demo-Image/toonify-emotion/sample2-toon.gif" width="40%"></img>
+
+[그림 16] Sample 2의 Tooni-fied Video
+
+<img src="./Demo-Image/toonify-emotion/sample2-slow.gif" width="40%"></img>
+
+[그림 17] Sample 2의 최종 결과물
+
+#### 3.1 How to Create Sample Video
+1. 1080p 이상의 화질(FHD 이상, 30fps)로 얼굴 동영상을 촬영한다.
+2. 촬영한 원본 영상을 10 프레임에 1장씩 프레임을 받아와 저장한다.
+3. 저장한 이미지를 StyleGAN2 FFHQ 모듈을 활용해 얼굴 영역만 crop하고, align한다.
+4. Aligned 이미지를 Tooni-fy 모델에 projection한다.
+5. Projection 이미지들을 모아서 cv2의 VideoWriter로 mp4 영상(fps=3)을 생성한다.
+6. [그림 14]와 [그림 16]의 영상이 생성된다.
+
+#### 3.2 How to Create Final Output
+1. [그림 14]와 [그림 16] 영상을 가져온다.
+2. 영상에서 Emotion Recognition을 실시한다. 이때, 얼굴이 검출되지 않으면 Cannot detect face region 이라는 문구를 삽입한다.
+3. Emotion Recognition을 모든 프레임에 실시하고 검출된 표정 정보를 삽입한 프레임을 다시 저장한다.
+4. 이 프레임을 VideoWriter로 mp4 영상(fps=3)을 생성한다.
+5. [그림 15]와 [그림 17]은 이렇게 생성된 최종 영상을 0.5배속한 것이다. 영상이 끊겨 보이는 것을 최소화 하기 위해 fps를 3으로 생성했으나, 표정 인식 결과물을 천천히 확인 가능하도록 느린 버전의 gif 파일을 추가했다.
+
+모든 프레임(원본, tooni-fied, emotion-recognition)은 이미지로 저장하고, 영상으로도 저장했다. 각각의 이미지에 따른 프로세스가 잘 이루어졌는지, 세부적인 결과물을 확인하기 위해 그렇게 구현하였다. 자세한 코드의 내용은 **Frame_by_frame_Emotion_Classification_and_Emojify.ipynb**에서 확인 가능하다.
 
 # References
 ### 1. StyleGAN2
