@@ -21,7 +21,7 @@
 
 <img src="./Demo-Image/stylegan2/dataset/ffhq-원본.jpg" width="70%"></img>
 
-[그림 1. FFHQ를 base network로 설정했을 때의 fake init snapshot.]
+[그림 1] FFHQ를 base network로 설정했을 때의 fake init snapshot.
 *  NVlab의 StyleGAN2에서 제공하는 고화질의 사람 얼굴 데이터 셋으로, 직접 훈련을 시키진 않았지만 style을 씌우는 base network로 FFHQ 모델을 사용했다.
 *  NVlab에서는 StyleGAN2 custom model 학습을 쉽게 할 수 있도록 FFHQ와 같은 데이터 셋과 pretrained 모델을 제공한다.
 *  StyleGAN2에서 style을 학습시키기 이전, fake init 스냅샷으로 [그림 1]과 같은 사진이 생성된다.
@@ -142,6 +142,7 @@
 
 - Emoji, Baby characters, Characters 데이터 셋을 FFHQ을 base로 학습시킨 StyleGAN2 모델의 network snapshot이다. Network를 저장하는 간격을 default 값인 4에서 1로 줄여 스타일이 조금씩 입혀지는 과정들을 보고, 가장 결과물이 나은 모델을 선정했다.
 - 결과물에서 사용한 Toonify 모델은 [그림 11]이다. FFHQ 데이터 셋[그림 1]과 비교하면 원본에서 얼마나 변했는지를 확인할 수 있다. Training 코드는 **StyleGAN2_Cartoon_Model.ipynb**에서 확인할 수 있다.
+- Emoji-fy model의 결과물은 [여기](https://drive.google.com/drive/folders/17OWhipBasJBeDOBvuXLDtq5qn6Ok_vZ_?usp=sharing)에서, Baby-fy model의 결과물은 [여기](https://drive.google.com/drive/folders/15RFw0e-gFsgPx2SihYMeFz4FvBVFOLDk?usp=sharing)에서, Tooni-fy model의 결과물은 [여기](https://drive.google.com/drive/folders/17a6M7VyKebakW_bcdSZ0mjl1B1w9kqOV?usp=sharing)에서 확인 가능하다.
 
 *2.2 Compare FFHQ(origin) with Emoji-fy, Baby-fy, Tooni-fy.*
 
@@ -196,12 +197,16 @@
 모든 프레임(원본, tooni-fied, emotion-recognition)은 이미지로 저장하고, 영상으로도 저장했다. 각각의 이미지에 따른 프로세스가 잘 이루어졌는지, 세부적인 결과물을 확인하기 위해 그렇게 구현하였다. 자세한 코드의 내용은 **Frame_by_frame_Emotion_Classification_and_Emojify.ipynb**에서 확인 가능하다.
 
 # References
-### 1. StyleGAN2
+This project was inspired by these amazing projects below. If you want to see the original project of StyleGAN2, Toonify, and Emotion Recognition using mini-Xception, please visit the address below.
+
+### 1. StyleGAN2 & Toonify
 [1.1 NVlab의 original StyleGAN2 Repo.](https://github.com/NVlabs/stylegan2.git)
 
 [1.2 Pinkney의 StyleGAN2 fork.](https://github.com/justinpinkney/stylegan2.git)
 
 [1.3 dvschultz의 StyleGAN2 fork.](https://github.com/dvschultz/stylegan2)
+
+[1.4 Pinkney의 Toonify Yourself!](https://www.justinpinkney.com/toonify-yourself/)
 
 ### 2. mini-Xception
 [2.1 Oarriaga의 mini-Xception Repo.](https://github.com/oarriaga/face_classification.git)
