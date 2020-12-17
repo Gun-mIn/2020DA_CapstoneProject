@@ -62,8 +62,9 @@
 
 
 # Initial Design
-[그림 5] 초기 프로그램 설계도
+<img src="./Demo-Image/program-process/initial-design.png" width="90%"></img>
 
+[그림 5] 초기 프로그램 설계도
  - 초기 프로그램 구조는 [그림 5]와 같다. StyleGAN2 모델을 이용하여 만든 personal emoji를 실시간 영상에서 얼굴 영역에 렌더링한다. 이때, 각각의 표정에 맞는 emoji를 미리 만들어두고, 예측한 표정에 따라 렌더링하는 것을 목표로 설계 및 구현했다.
 
 ## Create Personal Emoji
