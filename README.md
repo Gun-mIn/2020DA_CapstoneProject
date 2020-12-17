@@ -119,7 +119,35 @@
 *  Big-Xception과 origin-Xception의 경우, 모델의 용량 대비 정확도가 mini-Xception보다 떨어져 추가적으로 scaling하지 않았다.
 *  Real-time에서 돌아가는 것을 초기 목표로 했기에 validation set에 대한 정확도가 original model보다 **4%** 오른 **model 9**를 최종 모델로 선정했다.
 
+### 2. StyleGAN2 Modeling
+*2.1 Results Snapshots*
 
-<img src="./Demo-Image/stylegan2/model-snapshot/baby-fy.jpg" width="90%"></img>
-<img src="./Demo-Image/stylegan2/model-snapshot/cartooni-fy.jpg" width="90%"></img>
-<img src="./Demo-Image/stylegan2/model-snapshot/emoji-fy.jpg" width="90%"></img>
+<img src="./Demo-Image/stylegan2/model-snapshot/emoji-fy.jpg" width="70%"></img>
+
+[그림 9] Emoji-fy 모델의 network snapshot
+
+<img src="./Demo-Image/stylegan2/model-snapshot/baby-fy.jpg" width="70%"></img>
+
+[그림 10] Baby-fy 모델의 network snapshot
+
+<img src="./Demo-Image/stylegan2/model-snapshot/cartooni-fy.jpg" width="70%"></img>
+
+[그림 11] Tooni-fy 모델의 network snapshot
+
+- Emoji, Baby characters, Characters 데이터 셋을 FFHQ을 base로 학습시킨 StyleGAN2 모델의 network snapshot이다. Network를 저장하는 간격을 default 값인 4에서 1로 줄여 스타일이 조금씩 입혀지는 과정들을 보고, 가장 결과물이 나은 모델을 선정했다.
+- 결과물에서 사용한 Toonify 모델은 [그림 11]이다. FFHQ 데이터 셋[그림 1]과 비교하면 원본에서 얼마나 변했는지를 확인할 수 있다.
+
+*2.2 Compare FFHQ(origin) with Emoji-fy, Baby-fy, Tooni-fy.*
+
+| <img src="./Demo-Image/stylegan2/sample-snapshot/0.ffhq-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/1.baby-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/2.cartooni-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/3.emoji-fy-sample.jpg" width="80%"></img>  |
+|--|--|--|--|
+
+[그림 12] 왼쪽부터 FFHQ, Emoji-fy, Baby-fy, Tooni-fy 모델의 snapshot.
+
+- Snapshot 속 한 인물을 중심으로 비교해볼 수 있다. Projection 결과물이 가장 일정하고, 이쁘게 나오는 Tooni-fy 모델을 최종 모델로 선정했다.
+
+*2.3 Sample Images of Projection*
+
+[그림 13] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
+
+- Projection은 StyleGAN2의 FFHQ 얼굴 탐지와 정렬 모듈을 사용한다. Projection 코드는 [pinkney의 Toonify Yourself](https://colab.research.google.com/drive/1s2XPNMwf6HDhrJ1FMwlW1jl-eQ2-_tlk?usp=sharing)를 참고했다.
