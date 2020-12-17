@@ -6,6 +6,11 @@
 * Disney/Pixar/Dream Works의 캐릭터를 학습 시킨 StyleGAN2 모델을 이용해 사람 얼굴을 Toonify(캐릭터화)한다.
 * FER2013 데이터 셋을 학습 시킨 Keras 기반 모델 mini-Xception 구조를 활용해 모델을 만들고, 영상에서 사람의 표정을 인식한다.
 
+# Quick Summary
+*  사람의 얼굴 영역을 찾아 Toonify하는 과정은 StyleGAN2의 모델을 이용하고, Emotion Recognition은 mini-Xception 모델을 이용한다.
+*  StyleGAN2는 TF 1.x를 지원하고, mini-Xception은 TF/Keras 2.x를 지원하기 때문에 동시에 이용하는 것은 불가능하다. Colab에서 TF 1.x를 지정해 StyleGAN2를 먼저 사용해 Toonify하고, Tonnify된 영상에서 TF 2.x를 지정해 Emotion Recognitino을 진행한다.
+*  이론적인 부분(StyleGAN2의 구조와 이론, mini-Xception의 구조와 이론)은 **Interim report.pdf**에서 확인 가능하다. StyleGAN version 1과 2를 발표한 논문과, mini-Xception 구조를 처음 제안하고 사용한 논문에 대해 리뷰해놓았다.
+
 # Data Set
 ### 1. [Fer2013](https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/rules)
 *  7가지 감정에 따른 사람 얼굴의 이미지 데이터 셋이다.
