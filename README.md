@@ -140,13 +140,16 @@
 *2.2 Compare FFHQ(origin) with Emoji-fy, Baby-fy, Tooni-fy.*
 
 | <img src="./Demo-Image/stylegan2/sample-snapshot/0.ffhq-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/1.baby-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/2.cartooni-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/3.emoji-fy-sample.jpg" width="80%"></img>  |
-|--|--|--|--|
+|:--:|:--:|:--:|:--:|
 
 [그림 12] 왼쪽부터 FFHQ, Emoji-fy, Baby-fy, Tooni-fy 모델의 snapshot.
 
 - Snapshot 속 한 인물을 중심으로 비교해볼 수 있다. Projection 결과물이 가장 일정하고, 이쁘게 나오는 Tooni-fy 모델을 최종 모델로 선정했다.
 
 *2.3 Sample Images of Projection*
+
+| <img src="./Demo-Image/stylegan2/projection/example.jpg" width="900"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01.png" width="100%"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01-toon.jpg" width="100%"></img>  |
+|:--:|:--:|:--:|
 
 [그림 13] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
 
