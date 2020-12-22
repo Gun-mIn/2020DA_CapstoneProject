@@ -53,7 +53,7 @@
 <img src="./Demo-Image/stylegan2/dataset/cartoon-원본.jpg" width="70%"></img>
 </div>
 
-[그림 4] Cartooni-fy StyleGAN2 dataset. 출처 : [Justin Pinkney](https://github.com/justinpinkney/toonify)
+[그림 4] Cartooni-fy StyleGAN2 dataset. 출처 : [Justin Pinkney의 Cartoon Dataset ](https://github.com/justinpinkney/toonify)
 
 * Disney, Pixar, Dream Works의 애니메이션 캐릭터의 얼굴들로 이루어진 데이터 셋이다. Pinkney의 Toonify 프로젝트에서 쓰인 모델을 training할 때 사용된 데이터 셋이다.
 * [링크](https://github.com/justinpinkney/toonify)로 이동하면 원본 데이터 셋을, [Pinkney의 블로그 포스트 글](https://www.justinpinkney.com/toonify-yourself/)에서 자세한 프로젝트의 내용을 확인할 수 있다.
