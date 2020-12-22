@@ -65,6 +65,7 @@
 # 3. Design
 ## 3.1 Initial Design
 <img src="./Demo-Image/program-process/initial-design.png" width="90%"></img>
+
 [그림 3] 초기 프로그램 설계도
  - 초기 프로그램 구조는 [그림 5]와 같다. StyleGAN2 모델을 이용하여 만든 personal emoji를 실시간 영상에서 얼굴 영역에 렌더링한다. 이때, 각각의 표정에 맞는 emoji를 미리 만들어두고, 예측한 표정에 따라 렌더링하는 것을 목표로 설계 및 구현했다.
 
@@ -116,7 +117,7 @@
 ## <a id="real_time">5.2 Real-time Emotion Recognition & Rendering a Personal Emoji
 <img src="./Demo-Image/real-time-emotion-recognition/real-time-예시.gif" width="40%"></img>
 
-[그림 7] 실시간 personal emoji 렌더링 예시
+[그림 8] 실시간 personal emoji 렌더링 예시
 
 - mini-Xception 구조의 경우, 파라미터의 수가 기존 모델에 비해 현저히 적어 실시간 영상에서 사용하는 것이 문제가 없었다. 그러나 StyleGAN2의 경우, GPU 메모리 부족과 용량이 매우 커 projection을 하는 시간이 매우 오래 걸리는 점을 고려하여 [그림 7]과 같이 미리 생성한 personal emoji를 렌더링하도록 구현했다.
 - mini-Xception 모델은 [omar178](https://github.com/omar178/Emotion-recognition#p1)과 [oarriaga](https://github.com/oarriaga/face_classification)의 작업물과 논문을 참고하여 scaling 하였다.
@@ -154,15 +155,15 @@
 ### 5.4.1 Network Snapshots
 <img src="./Demo-Image/stylegan2/model-snapshot/emoji-fy.jpg" width="70%"></img>
 
-[그림 8] Emoji-fy 모델의 network snapshot
+[그림 9] Emoji-fy 모델의 network snapshot
 
 <img src="./Demo-Image/stylegan2/model-snapshot/baby-fy.jpg" width="70%"></img>
 
-[그림 9] Baby-fy 모델의 network snapshot
+[그림 10] Baby-fy 모델의 network snapshot
 
 <img src="./Demo-Image/stylegan2/model-snapshot/cartooni-fy.jpg" width="70%"></img>
 
-[그림 10] Tooni-fy 모델의 network snapshot
+[그림 11] Tooni-fy 모델의 network snapshot
 
 - Emoji, Baby characters, Characters 데이터 셋을 FFHQ을 base로 학습시킨 StyleGAN2 모델의 network snapshot이다. Network를 저장하는 간격을 default 값인 4에서 1로 줄여 스타일이 조금씩 입혀지는 과정들을 보고, 가장 결과물이 나은 모델을 선정했다.
 - 결과물에서 사용한 Toonify 모델은 [그림 11]이다. FFHQ 데이터 셋[그림 1]과 비교하면 원본에서 얼마나 변했는지를 확인할 수 있다. Training 코드는 **StyleGAN2_Cartoon_Model.ipynb**에서 확인할 수 있다.
@@ -172,7 +173,7 @@
 | <img src="./Demo-Image/stylegan2/sample-snapshot/0.ffhq-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/1.baby-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/2.cartooni-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/3.emoji-fy-sample.jpg" width="80%"></img>  |
 |:--:|:--:|:--:|:--:|
 
-[그림 11] 왼쪽부터 FFHQ, Emoji-fy, Baby-fy, Tooni-fy 모델의 snapshot.
+[그림 12] 왼쪽부터 FFHQ, Emoji-fy, Baby-fy, Tooni-fy 모델의 snapshot.
 
 - Snapshot 속 한 인물을 중심으로 비교해볼 수 있다. Projection 결과물이 가장 일정하고, 이쁘게 나오는 Tooni-fy 모델을 최종 모델로 선정했다.
 
@@ -181,7 +182,7 @@
 | <img src="./Demo-Image/stylegan2/projection/example.jpg" width="900"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01.png" width="100%"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01-toon.jpg" width="100%"></img>  |
 |:--:|:--:|:--:|
 
-[그림 12] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
+[그림 13] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
 
 - 왼쪽의 원본 이미지는 100K Faces 프로젝트를 통해 생성된 가상의 인물 사진이다. 인터넷 상에서 무료로 공개되어 있으므로 [구글 드라이브 링크](https://drive.google.com/drive/folders/1WPsVkdt4qDxjV2itBgw_DXkTdU-esEwY)에서 사진들을 확인 가능하다.
 - Projection은 StyleGAN2의 FFHQ 얼굴 탐지와 정렬 모듈을 사용한다. Projection 코드는 [pinkney의 Toonify Yourself](https://colab.research.google.com/drive/1s2XPNMwf6HDhrJ1FMwlW1jl-eQ2-_tlk?usp=sharing)를 참고했다.
@@ -191,13 +192,13 @@
 <img src="./Demo-Image/toonify-emotion/sample1-toon.gif" width="40%"></img>
 <img src="./Demo-Image/toonify-emotion/sample2-toon.gif" width="40%"></img>
 </div>
-[그림 13] Sample 1(왼쪽)과 Sample 2(오른쪽)의 Tooni-fied Video 
+[그림 14] Sample 1(왼쪽)과 Sample 2(오른쪽)의 Tooni-fied Video 
 
 <div>
 <img src="./Demo-Image/toonify-emotion/sample1-slow.gif" width="40%"></img>
 <img src="./Demo-Image/toonify-emotion/sample2-slow.gif" width="40%"></img>
 </div>
-[그림 14] Sample 1(왼쪽)과 Sample 2(오른쪽)의 최종 결과물
+[그림 15] Sample 1(왼쪽)과 Sample 2(오른쪽)의 최종 결과물
 
 - Sample 1은 스마트폰 전면 카메라를 이용했기 때문에 FHD가 최대 화질이었지만, Sample 2의 경우 후면 카메라를 이용하여 UHD로 촬영했다.  [그림 13]과 [그림 14]를 보면 더 고화질로 촬영한 Sample 2의 결과물이 좀 더 좋은 퀄리티로 생성되었음을 확인할 수 있다.
 - [그림 12]의 projection 예시를 보면, 고화질의 사진 한 장에 대해서는 매우 좋은 퀄리티의 결과물이 생성되는 것을 볼 수 있다. [그림 12]와 [그림 13, 14] 모두 동일한 kimg(styleGAN2의 epoch과 같은 training step)에서 생성되었음에도 불구하고, [그림 12]의 결과물이 배경과 사람의 조화나, 사람 얼굴의 identity features에 있어 차이가 발생한 이유를 화질과 배경 색의 일관성이라고 해석하고 있다. **사람 뒤의 배경이 일관된 색을 가지고 있고, 매우 고화질로 영상을 촬영한 경우 좀 더 선명하고 배경이 일관적인 영상이 생성된다.**
