@@ -150,6 +150,7 @@
 
 [그림 13] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
 
+- 왼쪽의 원본 이미지는 100K Faces 프로젝트를 통해 생성된 가상의 인물 사진이다. 인터넷 상에서 무료로 공개되어 있으므로 [구글 드라이브 링크](https://drive.google.com/drive/folders/1WPsVkdt4qDxjV2itBgw_DXkTdU-esEwY)에서 사진들을 확인 가능하다.
 - Projection은 StyleGAN2의 FFHQ 얼굴 탐지와 정렬 모듈을 사용한다. Projection 코드는 [pinkney의 Toonify Yourself](https://colab.research.google.com/drive/1s2XPNMwf6HDhrJ1FMwlW1jl-eQ2-_tlk?usp=sharing)를 참고했다.
 
 ### 3. Frame-by-frame Toonify & Emotion Recognition
