@@ -154,21 +154,18 @@
 - Projection은 StyleGAN2의 FFHQ 얼굴 탐지와 정렬 모듈을 사용한다. Projection 코드는 [pinkney의 Toonify Yourself](https://colab.research.google.com/drive/1s2XPNMwf6HDhrJ1FMwlW1jl-eQ2-_tlk?usp=sharing)를 참고했다.
 
 ### 3. Frame-by-frame Toonify & Emotion Recognition
+<div>
 <img src="./Demo-Image/toonify-emotion/sample1-toon.gif" width="40%"></img>
-
-[그림 14] Sample 1의 Tooni-fied Video
-
-<img src="./Demo-Image/toonify-emotion/sample1-slow.gif" width="40%"></img>
-
-[그림 15] Sample 1의 최종 결과물
-
 <img src="./Demo-Image/toonify-emotion/sample2-toon.gif" width="40%"></img>
+</div>
+[그림 14] Sample 1(왼쪽)과 Sample 2(오른쪽)의 Tooni-fied Video 
 
-[그림 16] Sample 2의 Tooni-fied Video
-
+<div>
+<img src="./Demo-Image/toonify-emotion/sample1-slow.gif" width="40%"></img>
 <img src="./Demo-Image/toonify-emotion/sample2-slow.gif" width="40%"></img>
+</div>
+[그림 15] Sample 1(왼쪽)과 Sample 2(오른쪽)의 최종 결과물
 
-[그림 17] Sample 2의 최종 결과물
 
 #### 3.1 How to Create Sample Video
 1. 1080p 이상의 화질(FHD 이상, 30fps)로 얼굴 동영상을 촬영한다.
