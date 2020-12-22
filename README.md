@@ -145,7 +145,7 @@
 
 *2.3 Sample Images of Projection*
 
-| <img src="./Demo-Image/stylegan2/projection/example.png" width="900"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01.jpg" width="100%"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01-toon.png" width="100%"></img>  |
+| <img src="./Demo-Image/stylegan2/projection/example.jpg" width="900"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01.png" width="100%"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01-toon.jpg" width="100%"></img>  |
 |:--:|:--:|:--:|
 
 [그림 13] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
