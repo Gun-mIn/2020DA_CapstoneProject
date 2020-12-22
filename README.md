@@ -75,8 +75,14 @@
 
 # <a id="train_model">4. How to Train
 ## 4.1 StyleGAN2 Using Custom Dataset
+<div>
+<img src="./Demo-Image/program-process/train-stylegan.png" width="70%"></img>
+</div>
 
 ## 4.2 Scaling mini-Xception
+<div>
+<img src="./Demo-Image/program-process/train-mini-xception.png" width="70%"></img>
+</div>
 
 # 5. Results
 ## <a id="personal_emoji">5.1 Create a Personal Emoji
