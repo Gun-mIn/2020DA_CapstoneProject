@@ -34,6 +34,7 @@
 <img src="./Demo-Image/stylegan2/dataset/ffhq-원본.jpg" width="70%"></img>
 </div>
 [그림 1] FFHQ를 base network로 설정했을 때의 fake init snapshot.  출처 : [NVlab StyleGAN2 repository](https://github.com/NVlabs/ffhq-dataset.git)
+
 *  NVlab의 StyleGAN2에서 제공하는 고화질의 사람 얼굴 데이터 셋으로, 직접 훈련을 시키진 않았지만 style을 씌우는 base network로 FFHQ 모델을 사용했다.
 *  NVlab에서는 StyleGAN2 custom model 학습을 쉽게 할 수 있도록 FFHQ와 같은 데이터 셋과 pretrained 모델을 제공한다.
 *  StyleGAN2에서 style을 학습시키기 이전, fake init 스냅샷으로 [그림 1]과 같은 사진이 생성된다.
