@@ -35,7 +35,8 @@
 <img src="./Demo-Image/stylegan2/dataset/ffhq-원본.jpg" width="70%"></img>
 </div>
 
-[그림 1] FFHQ를 base network로 설정했을 때의 fake init snapshot.  출처 : [NVlab StyleGAN2 repository](https://github.com/NVlabs/ffhq-dataset.git)
+[그림 1] FFHQ를 base network로 설정했을 때의 fake init snapshot.
+*출처 : [NVlab StyleGAN2 repository](https://github.com/NVlabs/ffhq-dataset.git)*
 
 *  NVlab의 StyleGAN2에서 제공하는 고화질의 사람 얼굴 데이터 셋으로, 직접 훈련을 시키진 않았지만 style을 씌우는 base network로 FFHQ 모델을 사용했다.
 *  NVlab에서는 StyleGAN2 custom model 학습을 쉽게 할 수 있도록 FFHQ와 같은 데이터 셋과 pretrained 모델을 제공한다.
@@ -54,7 +55,8 @@
 <img src="./Demo-Image/stylegan2/dataset/cartoon-원본.jpg" width="70%"></img>
 </div>
 
-[그림 4] Cartooni-fy StyleGAN2 dataset. 출처 : [Justin Pinkney의 Cartoon Dataset ](https://github.com/justinpinkney/toonify)
+[그림 2] Cartooni-fy StyleGAN2 dataset.
+*출처 : [Justin Pinkney의 Cartoon Dataset ](https://github.com/justinpinkney/toonify)*
 
 * Disney, Pixar, Dream Works의 애니메이션 캐릭터의 얼굴들로 이루어진 데이터 셋이다. Pinkney의 Toonify 프로젝트에서 쓰인 모델을 training할 때 사용된 데이터 셋이다.
 * [링크](https://github.com/justinpinkney/toonify)로 이동하면 원본 데이터 셋을, [Pinkney의 블로그 포스트 글](https://www.justinpinkney.com/toonify-yourself/)에서 자세한 프로젝트의 내용을 확인할 수 있다.
@@ -63,13 +65,13 @@
 # 3. Design
 ## 3.1 Initial Design
 <img src="./Demo-Image/program-process/initial-design.png" width="90%"></img>
-[그림 5] 초기 프로그램 설계도
+[그림 3] 초기 프로그램 설계도
  - 초기 프로그램 구조는 [그림 5]와 같다. StyleGAN2 모델을 이용하여 만든 personal emoji를 실시간 영상에서 얼굴 영역에 렌더링한다. 이때, 각각의 표정에 맞는 emoji를 미리 만들어두고, 예측한 표정에 따라 렌더링하는 것을 목표로 설계 및 구현했다.
 
 ## 3.2 Final Design
 <img src="./Demo-Image/program-process/final-design.png" width="90%"></img>
 
-[그림 8] 최종 프로그램 설계도
+[그림 4] 최종 프로그램 설계도
 - Real-time을 포기하고, 영상의 프레임 단위로 Tooni-fy를 진행하는 것을 선택했다. [그림 8]과 같이 원본 영상이 들어오면, 10 프레임 단위로 프레임을 받아 와 Toonified 영상을 만든다. 그렇게 만들어진 Toonified 영상에 Emotion Recognition을 진행해 최종 결과물을 만든다.
 - 초기 설계에서 Personal emoji의 결과물이 예상보다 예쁘게 나오지 않아 Disney/Pixar/Dream Works의 애니메이션 캐릭터 얼굴을 학습 시킨 Toonify 모델을 사용했다.
 
@@ -79,17 +81,34 @@
 <img src="./Demo-Image/program-process/train-stylegan.png" width="80%"></img>
 </div>
 
+[그림 5] StyleGAN2 Tooni-fy model training process.
+
+- 우리 프로젝트에서는 StyleGAN2에 custom dataset을 학습시켜 그 결과물을 이용하였다. 사용되었던 dataset은 [2.Dataset](#dataset_head)에 자세히 적어두었고, 각각의 dataset에 대한 결과물은 [5.4 StyleGAN2](#stylegan_result)에서 확인 가능하다.
+- 최종적으로는 pinkney의 cartoon dataset을 이용하였고, 이를 학습시킨 과정은 [그림 5]와 같다. StyleGAN2의 base network로 FFHQ(사람 얼굴의 데이터 셋으로 pre-train 된) StyleGAN2 model을 사용해주었다.
+- StyleGAN 특성 상, base network에 style을 한층 한층 입혀가며 최종적으로 원하는 dataset의 fake image를 생성할 수 있는 network가 만들어진다. 현재 프로젝트에서는 사람 얼굴에 캐릭터의 스타일을 입히기 원했기 때문에 cartoon의 style을 FFHQ 모델에 입혀주는 방식으로 진행되었다.
+- StyleGAN2에서 epoch과 같은 개념으로 사용되는 kimg를 default 값인 25,000으로 설정하였고, network snapshot을 저장하는 주기를 4(default)에서 1로 줄여주었다. 이를 이용해 좀 더 좁은 간격으로 저장된 network를 확인하고, 원하는 스타일의 pkl 파일을 사용할 수 있었다.
+- StyleGAN2의 제안과 이론은 NVIDIA의 [publication](https://openaccess.thecvf.com/content_CVPR_2019/html/Karras_A_Style-Based_Generator_Architecture_for_Generative_Adversarial_Networks_CVPR_2019_paper.html)을, StyleGAN2의 소스코드는 [NVlab의 repository](https://github.com/NVlabs/stylegan2)를 참고하였다.
+
+
 ## 4.2 Scaling mini-Xception
 <div>
 <img src="./Demo-Image/program-process/train-mini-xception.png" width="50%"></img>
 </div>
+
+[그림 6] mini-Xception을 기반으로 한 model 9의 구조.
+
+- 우리 프로젝트는 Xception을 경량화 한 CNN 모델 구조인 mini-Xception 구조를 이용해 감정 분류에 사용했다. Real-time으로 model import가 가능할 정도로 용량이 가볍고, 파라미터의 수가 기존의 CNN 모델보다 훨씬 적은 것이 특징이다.
+- Original mini-Xception에 대해서는 [GitHub repository](https://github.com/oarriaga/face_classification)와 [publication](https://arxiv.org/abs/1710.07557)에서 확인 가능하다. 현재 프로젝트의 소스코드는 이 original repository에서 영감을 받은 [GitHub 프로젝트](https://github.com/omar178/Emotion-recognition#p1)를 참고하였다.
+- Original mini-Xception 구조에 scaling을 진행하여 가장 높은 validation 정확도를 보인 모델 9를 최종 모델로 선택했다. 총 16번의 scaling을 진행하였고, 각각의 모델에 대한 자세한 결과물은  [5.3 mini-Xception](#mini_xception)에서 확인할 수 있다.
+- 최종적으로 선정된 모델 9의 구조는 [그림 6]과 같다. 기존의 48x48의 입력 이미지를 94x94로 높였고(Resolution scaling), Convolution block을 4번이 아닌 6번으로 2개의 블록을 추가해주었다(Width/Depth scaling).
+- Original Xception과 Big-Xception 역시 사용해 보았지만, 용량 대비 정확도가 높지 않아 real-time에 적절하지 않다고 여겨 mini-Xception 기반의 모델 9를 선택하게 되었다.
 
 # 5. Results
 ## <a id="personal_emoji">5.1 Create a Personal Emoji
 |  <img src="./Demo-Image/personal-emoji/origin.jpg" width="80%"></img>  |  <img src="./Demo-Image/personal-emoji/masked.png" width="80%"></img>  |  <img src="./Demo-Image/personal-emoji/remove-background.png" width="80%"></img>  |  <img src="./Demo-Image/personal-emoji/cropped.png" width="80%"></img>  |
 |:---:|:---:|:---:|:---:|
 
-[그림 6] personal emoji 생성 과정. 왼쪽부터 StyleGAN2를 통해 생성한 personal emoji 원본, mask를 씌운 이미지, mask 부분을 투명하게 제거한 이미지, face crop을 한 최종 이미지.
+[그림 7] personal emoji 생성 과정. 왼쪽부터 StyleGAN2를 통해 생성한 personal emoji 원본, mask를 씌운 이미지, mask 부분을 투명하게 제거한 이미지, face crop을 한 최종 이미지.
 
 - Personal emoji는 사람의 얼굴을 토대로 emoji의 스타일을 덧씌워 새로운 emoji를 생성한 것을 의미한다. [그림 6]을 보면 가장 왼쪽의 이미지가 사람의 얼굴 사진을 base로 생성한 personal emoji이다. Emoji-fy 모델을 이용하여 생성한 사진에서 배경을 제거해주기 위해 cv2의 Contour 함수를 사용했다.
 - Contour 영역을 검출하고, 배경으로 추정되는 부분에 mask를 씌운다. 이 mask 부분의 색상을 지워주고, RGBA로 변환하여 png 파일로 저장한다. 이 png 파일을 얼굴 영역 중심으로 crop 해주면 최종 이미지인 가장 오른쪽의 이미지가 생성된다. 자세한 코드는 **Personal-Emoji** 폴더에서 확인할 수 있다.
@@ -135,15 +154,15 @@
 ### 5.4.1 Network Snapshots
 <img src="./Demo-Image/stylegan2/model-snapshot/emoji-fy.jpg" width="70%"></img>
 
-[그림 9] Emoji-fy 모델의 network snapshot
+[그림 8] Emoji-fy 모델의 network snapshot
 
 <img src="./Demo-Image/stylegan2/model-snapshot/baby-fy.jpg" width="70%"></img>
 
-[그림 10] Baby-fy 모델의 network snapshot
+[그림 9] Baby-fy 모델의 network snapshot
 
 <img src="./Demo-Image/stylegan2/model-snapshot/cartooni-fy.jpg" width="70%"></img>
 
-[그림 11] Tooni-fy 모델의 network snapshot
+[그림 10] Tooni-fy 모델의 network snapshot
 
 - Emoji, Baby characters, Characters 데이터 셋을 FFHQ을 base로 학습시킨 StyleGAN2 모델의 network snapshot이다. Network를 저장하는 간격을 default 값인 4에서 1로 줄여 스타일이 조금씩 입혀지는 과정들을 보고, 가장 결과물이 나은 모델을 선정했다.
 - 결과물에서 사용한 Toonify 모델은 [그림 11]이다. FFHQ 데이터 셋[그림 1]과 비교하면 원본에서 얼마나 변했는지를 확인할 수 있다. Training 코드는 **StyleGAN2_Cartoon_Model.ipynb**에서 확인할 수 있다.
@@ -153,7 +172,7 @@
 | <img src="./Demo-Image/stylegan2/sample-snapshot/0.ffhq-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/1.baby-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/2.cartooni-fy-sample.jpg" width="80%"></img>  |  <img src="./Demo-Image/stylegan2/sample-snapshot/3.emoji-fy-sample.jpg" width="80%"></img>  |
 |:--:|:--:|:--:|:--:|
 
-[그림 12] 왼쪽부터 FFHQ, Emoji-fy, Baby-fy, Tooni-fy 모델의 snapshot.
+[그림 11] 왼쪽부터 FFHQ, Emoji-fy, Baby-fy, Tooni-fy 모델의 snapshot.
 
 - Snapshot 속 한 인물을 중심으로 비교해볼 수 있다. Projection 결과물이 가장 일정하고, 이쁘게 나오는 Tooni-fy 모델을 최종 모델로 선정했다.
 
@@ -162,7 +181,7 @@
 | <img src="./Demo-Image/stylegan2/projection/example.jpg" width="900"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01.png" width="100%"></img>  |  <img src="./Demo-Image/stylegan2/projection/example_01-toon.jpg" width="100%"></img>  |
 |:--:|:--:|:--:|
 
-[그림 13] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
+[그림 12] 왼쪽부터 원본 이미지, 얼굴 중심으로 align된 이미지, Tooni-fied 이미지.
 
 - 왼쪽의 원본 이미지는 100K Faces 프로젝트를 통해 생성된 가상의 인물 사진이다. 인터넷 상에서 무료로 공개되어 있으므로 [구글 드라이브 링크](https://drive.google.com/drive/folders/1WPsVkdt4qDxjV2itBgw_DXkTdU-esEwY)에서 사진들을 확인 가능하다.
 - Projection은 StyleGAN2의 FFHQ 얼굴 탐지와 정렬 모듈을 사용한다. Projection 코드는 [pinkney의 Toonify Yourself](https://colab.research.google.com/drive/1s2XPNMwf6HDhrJ1FMwlW1jl-eQ2-_tlk?usp=sharing)를 참고했다.
@@ -172,13 +191,16 @@
 <img src="./Demo-Image/toonify-emotion/sample1-toon.gif" width="40%"></img>
 <img src="./Demo-Image/toonify-emotion/sample2-toon.gif" width="40%"></img>
 </div>
-[그림 14] Sample 1(왼쪽)과 Sample 2(오른쪽)의 Tooni-fied Video 
+[그림 13] Sample 1(왼쪽)과 Sample 2(오른쪽)의 Tooni-fied Video 
 
 <div>
 <img src="./Demo-Image/toonify-emotion/sample1-slow.gif" width="40%"></img>
 <img src="./Demo-Image/toonify-emotion/sample2-slow.gif" width="40%"></img>
 </div>
-[그림 15] Sample 1(왼쪽)과 Sample 2(오른쪽)의 최종 결과물
+[그림 14] Sample 1(왼쪽)과 Sample 2(오른쪽)의 최종 결과물
+
+- Sample 1은 스마트폰 전면 카메라를 이용했기 때문에 FHD가 최대 화질이었지만, Sample 2의 경우 후면 카메라를 이용하여 UHD로 촬영했다.  [그림 13]과 [그림 14]를 보면 더 고화질로 촬영한 Sample 2의 결과물이 좀 더 좋은 퀄리티로 생성되었음을 확인할 수 있다.
+- [그림 12]의 projection 예시를 보면, 고화질의 사진 한 장에 대해서는 매우 좋은 퀄리티의 결과물이 생성되는 것을 볼 수 있다. [그림 12]와 [그림 13, 14] 모두 동일한 kimg(styleGAN2의 epoch과 같은 training step)에서 생성되었음에도 불구하고, [그림 12]의 결과물이 배경과 사람의 조화나, 사람 얼굴의 identity features에 있어 차이가 발생한 이유를 화질과 배경 색의 일관성이라고 해석하고 있다. **사람 뒤의 배경이 일관된 색을 가지고 있고, 매우 고화질로 영상을 촬영한 경우 좀 더 선명하고 배경이 일관적인 영상이 생성된다.**
 
 ### 5.5.1 How to Create Sample Video
 1. 1080p 이상의 화질(FHD 이상, 30fps)로 얼굴 동영상을 촬영한다.
@@ -186,16 +208,16 @@
 3. 저장한 이미지를 StyleGAN2 FFHQ 모듈을 활용해 얼굴 영역만 crop하고, align한다.
 4. Aligned 이미지를 Tooni-fy 모델에 projection한다.
 5. Projection 이미지들을 모아서 cv2의 VideoWriter로 mp4 영상(fps=3)을 생성한다.
-6. [그림 14]와 [그림 16]의 영상이 생성된다.
+6. [그림 13]의 영상이 생성된다.
 
 ### 5.5.2 How to Create Final Output
-1. [그림 14]와 [그림 16] 영상을 가져온다.
+1. [그림 13]의 영상을 가져온다.
 2. 영상에서 Emotion Recognition을 실시한다. 이때, 얼굴이 검출되지 않으면 Cannot detect face region 이라는 문구를 삽입한다.
 3. Emotion Recognition을 모든 프레임에 실시하고 검출된 표정 정보를 삽입한 프레임을 다시 저장한다.
 4. 이 프레임을 VideoWriter로 mp4 영상(fps=3)을 생성한다.
-5. [그림 15]와 [그림 17]은 이렇게 생성된 최종 영상을 0.5배속한 것이다. 영상이 끊겨 보이는 것을 최소화 하기 위해 fps를 3으로 생성했으나, 표정 인식 결과물을 천천히 확인 가능하도록 느린 버전의 gif 파일을 추가했다.
+5. [그림 14]은 이렇게 생성된 최종 영상을 0.5배속한 것이다. 영상이 끊겨 보이는 것을 최소화 하기 위해 fps를 3으로 생성했으나, 표정 인식 결과물을 천천히 확인 가능하도록 느린 버전의 gif 파일을 추가했다.
 
-모든 프레임(원본, tooni-fied, emotion-recognition)은 이미지로 저장하고, 영상으로도 저장했다. 각각의 이미지에 따른 프로세스가 잘 이루어졌는지, 세부적인 결과물을 확인하기 위해 그렇게 구현하였다. 자세한 코드의 내용은 **Frame_by_frame_Emotion_Classification_and_Emojify.ipynb**에서 확인 가능하다.
+모든 프레임(원본, tooni-fied, emotion-recognition)은 이미지로 저장하고, 영상으로도 저장했다. 각각의 이미지에 따른 프로세스가 잘 이루어졌는지, 세부적인 결과물을 확인하기 위해 그렇게 구현하였다. 자세한 코드의 내용은 현재 repository에 업로드한 **Frame_by_frame_Emotion_Classification_and_Emojify.ipynb**에서 확인 가능하다.
 
 # 6. Reference
 This project was inspired by these amazing projects below. If you want to see the original project of StyleGAN2, Toonify, and Emotion Recognition using mini-Xception, please visit the address below.
