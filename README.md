@@ -33,6 +33,7 @@
 <div>
 <img src="./Demo-Image/stylegan2/dataset/ffhq-원본.jpg" width="70%"></img>
 </div>
+
 [그림 1] FFHQ를 base network로 설정했을 때의 fake init snapshot.  출처 : [NVlab StyleGAN2 repository](https://github.com/NVlabs/ffhq-dataset.git)
 
 *  NVlab의 StyleGAN2에서 제공하는 고화질의 사람 얼굴 데이터 셋으로, 직접 훈련을 시키진 않았지만 style을 씌우는 base network로 FFHQ 모델을 사용했다.
@@ -51,6 +52,7 @@
 <div>
 <img src="./Demo-Image/stylegan2/dataset/cartoon-원본.jpg" width="70%"></img>
 </div>
+
 [그림 4] Cartooni-fy StyleGAN2 dataset. 출처 : [Justin Pinkney](https://github.com/justinpinkney/toonify)
 
 * Disney, Pixar, Dream Works의 애니메이션 캐릭터의 얼굴들로 이루어진 데이터 셋이다. Pinkney의 Toonify 프로젝트에서 쓰인 모델을 training할 때 사용된 데이터 셋이다.
